@@ -1,0 +1,24 @@
+{
+	"name": "EveOnlineSSOAuth",
+	"author": "[https://github.com/RazeSoldier RazeSoldier]",
+	"version": "0.1",
+	"description": "This extension expands WSOAuth extension and provide a EveOnline SSO login method.",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">=1.37.0",
+		"extensions": {
+			"WSOAuth": ">=4.1"
+		}
+	},
+	"AutoloadNamespaces": {
+		"RazeSoldier\\MWEveOnlineSSOAuth\\": "includes/"
+	},
+	"Hooks": {
+		"WSOAuthGetAuthProviders": "RazeSoldier\\MWEveOnlineSSOAuth\\EveOnlineSSOAuthHooks::addAuthProvider",
+		"WSOAuthAfterGetUser": "RazeSoldier\\MWEveOnlineSSOAuth\\EveOnlineSSOAuthHooks::onAfterGetUser",
+		"LoadExtensionSchemaUpdates": "RazeSoldier\\MWEveOnlineSSOAuth\\EveOnlineSSOAuthHooks::onLoadExtensionSchemaUpdates"
+	},
+	"load_composer_autoloader": true,
+	"manifest_version": 2
+}

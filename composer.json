@@ -1,0 +1,16 @@
+{
+	"name": "razesoldier/mw-eveonline-auth",
+	"version": "0.1",
+	"description": "This extension expands WSOAuth extension and provide a EveOnline SSO login method.",
+	"type": "mediawiki-extension",
+	"authors": [
+		{
+			"name": "RazeSoldier",
+			"homepage": "https://github.com/RazeSoldier"
+		}
+	],
+	"license": "GPL-2.0-or-later",
+    "require": {
+        "dts-eve/oauth2-eve": "^1.0"
+    }
+}
