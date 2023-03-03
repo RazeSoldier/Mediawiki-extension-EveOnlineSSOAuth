@@ -11,6 +11,6 @@
 	],
 	"license": "GPL-2.0-or-later",
     "require": {
-        "dts-eve/oauth2-eve": "^1.0"
+        "razesoldier/oauth2-eve": "^1.0"
     }
 }
