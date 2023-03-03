@@ -36,9 +36,12 @@ class EveOnlineSSOAuthHooks {
 	/**
 	 * 实现WSOAuthAfterGetUser Hook。
 	 * @see https://www.mediawiki.org/wiki/Extension:WSOAuth/Hooks/WSOAuthAfterGetUser
-	 * @param array &$userInfo
+	 * @param array|false &$userInfo
 	 */
-	public static function onAfterGetUser( array &$userInfo ) {
+	public static function onAfterGetUser( &$userInfo ) {
+		if ( $userInfo === false ) {
+			return;
+		}
 		$characterID = $userInfo['characterID'];
 		$name = $userInfo['name'];
 

@@ -20,26 +20,30 @@
 
 namespace RazeSoldier\MWEveOnlineSSOAuth;
 
-use AuthProvider;
 use DtsEve\OAuth2\Client\Provider\EveOnline;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserIdentity;
 use RequestContext;
-use User;
+use WSOAuth\AuthenticationProvider\AuthProvider;
 
-class EveOnlineSSOAuthProvider implements AuthProvider {
+class EveOnlineSSOAuthProvider extends AuthProvider {
 	/**
 	 * @var AbstractProvider
 	 */
 	private $provider;
 
-	public function __construct() {
-		$configRepo = MediaWikiServices::getInstance()->getMainConfig();
+	/**
+	 * @param string $clientId
+	 * @param string $clientSecret
+	 * @param string|null $authUri
+	 * @param string|null $redirectUri
+	 */
+	public function __construct( string $clientId, string $clientSecret, ?string $authUri, ?string $redirectUri ) {
 		$this->provider = new EveOnline( [
-			'clientId' => $configRepo->get( 'OAuthClientId' ),
-			'clientSecret' => $configRepo->get( 'OAuthClientSecret' ),
-			'redirectUri' => $configRepo->get( 'OAuthRedirectUri' ),
+			'clientId' => $clientId,
+			'clientSecret' => $clientSecret,
+			'redirectUri' => $redirectUri,
 		] );
 	}
 
@@ -55,7 +59,7 @@ class EveOnlineSSOAuthProvider implements AuthProvider {
 	/**
 	 * @inheritDoc
 	 */
-	public function logout( User &$user ) {
+	public function logout( UserIdentity &$user ): void {
 	}
 
 	/**
@@ -84,6 +88,6 @@ class EveOnlineSSOAuthProvider implements AuthProvider {
 	/**
 	 * @inheritDoc
 	 */
-	public function saveExtraAttributes( $id ) {
+	public function saveExtraAttributes( int $id ): void {
 	}
 }
